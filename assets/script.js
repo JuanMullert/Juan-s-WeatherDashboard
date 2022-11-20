@@ -122,3 +122,42 @@ var getUVIndex = function (lat, lon) {
       .attr("type", "submit");
     return btn;
   };
+
+  //---------------------- load saved cities names from localStorage starts here ------------------------//
+var loadSavedCity = function () {
+    citiesListArr = JSON.parse(localStorage.getItem("weatherInfo"));
+    if (citiesListArr == null) {
+      citiesListArr = [];
+    }
+    for (var i = 0; i < citiesListArr.length; i++) {
+      var cityNameBtn = creatBtn(citiesListArr[i]);
+      searchedCities.append(cityNameBtn);
+    }
+  };
+  //---------------------- load saved citeis names from localStorage ends here ------------------------//
+  //----------------------- save searched city in to local storage starts here --------------------------//
+  var saveCityName = function (searchCityName) {
+    var newcity = 0;
+    citiesListArr = JSON.parse(localStorage.getItem("weatherInfo"));
+    if (citiesListArr == null) {
+      citiesListArr = [];
+      citiesListArr.unshift(searchCityName);
+    } else {
+      for (var i = 0; i < citiesListArr.length; i++) {
+        if (searchCityName.toLowerCase() == citiesListArr[i].toLowerCase()) {
+          return newcity;
+        }
+      }
+      if (citiesListArr.length < numOfCities) {
+        // create object
+        citiesListArr.unshift(searchCityName);
+      } else {
+        // control the length of the array. do not allow to save more than 10 cities
+        citiesListArr.pop();
+        citiesListArr.unshift(searchCityName);
+      }
+    }
+    localStorage.setItem("weatherInfo", JSON.stringify(citiesListArr));
+    newcity = 1;
+    return newcity;
+  };
