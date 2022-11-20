@@ -219,3 +219,5 @@ $(":button.list-group-item-action").on("click", function () {
   BtnClickHandler(event);
 });
 //-------------------------- call functions with submit button ends here ----------------------------//
+
+//-- by JD --//
