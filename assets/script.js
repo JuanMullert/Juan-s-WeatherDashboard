@@ -46,3 +46,4 @@ var getCityWeather = function (searchCityName) {
     }
   });
 };
+
